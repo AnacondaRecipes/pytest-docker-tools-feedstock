@@ -1,0 +1,54 @@
+{% set name = "pytest-docker-tools" %}
+{% set version = "3.1.9" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pytest_docker_tools-{{ version }}.tar.gz
+  sha256: 1b6a0cb633c20145731313335ef15bcf5571839c06726764e60cbe495324782b
+
+build:
+  number: 0
+  skip: true  # [py<=3.9 and py>=4]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - wheel
+    - pip
+  run:
+    - python
+    - pytest >=6.0.1
+    - docker-py >=4.3.1
+
+test:
+  source_files:
+    - tests
+  imports:
+    - pytest_docker_tools
+    - pytest_docker_tools.builder
+    - pytest_docker_tools.exceptions
+    - pytest_docker_tools.utils
+    - pytest_docker_tools.wrappers
+  requires:
+    - pip
+  commands:
+    - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest tests -v
+
+about:
+  home: https://github.com/Jc2k/pytest-docker-tools
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE
+  summary: Docker integration tests for pytest
+  description: |
+    pytest-docker-tools is a set of opinionated helpers for creating py.test 
+    fixtures for your smoke testing and integration testing
+  doc_url: https://github.com/Jc2k/pytest-docker-tools/blob/main/README.md
+  dev_url: https://github.com/Jc2k/pytest-docker-tools

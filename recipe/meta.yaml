@@ -11,14 +11,13 @@ source:
 
 build:
   number: 0
-  skip: true  # [py<3.9]
+  skip: true  # [py<39]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
   host:
     - python
     - setuptools
-    - wheel
     - pip
   run:
     - python

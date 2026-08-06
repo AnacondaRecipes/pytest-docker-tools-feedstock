@@ -1,13 +1,13 @@
 {% set name = "pytest-docker-tools" %}
-{% set version = "3.1.9" %}
+{% set version = "3.1.10" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pytest_docker_tools-{{ version }}.tar.gz
-  sha256: 1b6a0cb633c20145731313335ef15bcf5571839c06726764e60cbe495324782b
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name|replace("-", "_") }}-{{ version }}.tar.gz
+  sha256: fd499f13244d68735c3bb819030876ffa2807fb558003e66033a4f66d84e3552
 
 build:
   number: 0
